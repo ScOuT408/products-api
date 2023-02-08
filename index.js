@@ -27,5 +27,14 @@ app.get("/api/products", (req, res) => {
   res.json(products);
 });
 
+app.get("/api/products/:id", (req, res) => {
+  try {
+    const product = products.find((product) => product.id === req.params.id);
+    res.status(200).json(product);
+  } catch (err) {
+    return res.status(404).json({ message: "Product not found" });
+  }
+});
+
 // Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
